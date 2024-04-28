@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import CustomButton from '@/components/shared/button/custom-button.vue'
-import IconButton from '@/components/shared/button/icon-button.vue'
+import CustomImage from '@/components/shared/custom-image.vue'
 import CustomText from '@/components/shared/custom-text.vue'
-import CustomIcon from '@/components/shared/icon/custom-icon.vue'
 import CustomInput from '@/components/shared/input/custom-input.vue'
 import IconLink from '@/components/shared/link/icon-link.vue'
 
@@ -19,9 +18,9 @@ const navLinks = [
 </script>
 
 <template>
-  <header class="bg-brown fixed top-0 z-10 h-40 w-full py-6 text-white">
-    <div class="container mx-0 flex flex-col px-0 pr-10">
-      <div class="mb-6 ml-auto">
+  <header class="bg-brown sticky top-0 z-10 flex h-40 w-full justify-center py-6 text-white">
+    <div class="container flex flex-col gap-6">
+      <div class="ml-auto">
         <nav>
           <ul class="flex gap-5">
             <li v-for="link in navLinks" :key="link.href">
@@ -34,11 +33,17 @@ const navLinks = [
           </ul>
         </nav>
       </div>
-      <div class="flex items-center justify-between gap-6">
-        <CustomInput placeholder="Поиск..." icon="shared/search" />
-        <div class="flex items-center gap-4">
-          <IconLink to="basket" icon="shared/cart" />
-          <CustomButton> Иванов Иван </CustomButton>
+
+      <div class="flex items-center gap-6">
+        <NuxtLink class="w block h-full" to="/" title="На главную">
+          <CustomImage src="/images/logo.svg" width="200" height="auto" alt="Логотип компании" />
+        </NuxtLink>
+        <div class="flex w-full justify-between gap-5">
+          <CustomInput placeholder="Поиск..." icon="shared/search" />
+          <div class="flex items-center gap-4">
+            <IconLink to="basket" icon="shared/cart" />
+            <CustomButton> Иванов Иван</CustomButton>
+          </div>
         </div>
       </div>
     </div>
