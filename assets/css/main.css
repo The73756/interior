@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #dce6f2;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #aeaeae;
+  }
+
+  body {
+    @apply font-nunito bg-brown overflow-x-hidden;
+  }
+  ,
+  .icon {
+    /* reset styles and prevent icon from being selected */
+    @apply box-content inline-block select-none fill-current text-inherit;
+  }
+
+  .icon[data-axis*='x'] {
+    /* scale horizontally */
+    @apply w-[1em];
+  }
+
+  .icon[data-axis*='y'] {
+    /* scale vertically */
+    @apply h-[1em];
+  }
+
+  .icon-size {
+    @apply h-[1em] w-[1em];
+  }
+}
