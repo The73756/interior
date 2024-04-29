@@ -3,7 +3,8 @@ export interface SpritesMap {
   shared:
     | 'accessories'
     | 'appliances'
-    | 'arrow right'
+    | 'arrow-filled'
+    | 'arrow'
     | 'cart'
     | 'catalog'
     | 'check'
@@ -75,7 +76,12 @@ export const SPRITES_META: {
         width: 24,
         height: 24
       },
-      'arrow right': {
+      'arrow-filled': {
+        viewBox: '0 0 20 21',
+        width: 20,
+        height: 21
+      },
+      'arrow': {
         viewBox: '0 0 24 24',
         width: 24,
         height: 24

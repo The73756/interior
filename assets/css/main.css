@@ -21,9 +21,13 @@
   }
 
   body {
-    @apply font-nunito bg-brown overflow-x-hidden;
+    @apply overflow-x-hidden bg-brown font-nunito;
   }
-  ,
+
+  .body-custom {
+    @apply bg-beige;
+  }
+
   .icon {
     /* reset styles and prevent icon from being selected */
     @apply box-content inline-block select-none fill-current text-inherit;

@@ -7,13 +7,18 @@ defineProps({
   icon: {
     type: String as PropType<AnyIconName>,
     required: true
+  },
+  customSize: {
+    type: String,
+    default: 'text-32-500'
   }
 })
 </script>
 
 <template>
   <button
-    class="text-32-500 text-brown-red rounded-full bg-white p-2.5 transition-transform hover:scale-105"
+    class="bg-light flex items-center justify-center rounded-full p-2.5 text-brown-red transition-transform hover:scale-105"
+    :class="customSize"
   >
     <CustomIcon :name="icon" />
   </button>

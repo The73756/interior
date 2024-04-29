@@ -18,7 +18,7 @@ const navLinks = [
 </script>
 
 <template>
-  <header class="bg-brown sticky top-0 z-10 flex h-40 w-full justify-center py-6 text-white">
+  <header class="text-light sticky top-0 z-10 flex h-40 w-full justify-center bg-brown py-6">
     <div class="container flex flex-col gap-6">
       <div class="ml-auto">
         <nav>
@@ -41,7 +41,7 @@ const navLinks = [
         <div class="flex w-full justify-between gap-5">
           <CustomInput placeholder="Поиск..." icon="shared/search" />
           <div class="flex items-center gap-4">
-            <IconLink to="basket" icon="shared/cart" />
+            <IconLink to="/basket" icon="shared/cart" />
             <CustomButton> Иванов Иван</CustomButton>
           </div>
         </div>

@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-import CustomTitle from '@/components/shared/custom-title.vue'
+import MainCardList from '@/components/card-list/main-card-list.vue'
 </script>
 
 <template>
-  <CustomTitle> Hello </CustomTitle>
+  <div>
+    <MainCardList />
+  </div>
 </template>

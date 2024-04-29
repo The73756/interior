@@ -9,13 +9,15 @@ import SidebarBlock from '@/components/sidebar/sidebar-block.vue'
     <HeaderBlock />
     <div class="container flex">
       <SidebarBlock />
-      <main class="bg-beige relative ml-[190px] flex h-[400vh] min-h-screen w-full flex-col">
-        <slot />
+      <main class="relative ml-[190px] flex min-h-[calc(100vh-160px)] w-full flex-col bg-beige">
+        <div class="p-5">
+          <slot />
+        </div>
         <FooterBlock class="mt-auto" />
 
         <div
           aria-hidden="true"
-          class="bg-beige absolute left-0 top-0 h-[calc(100%-210px)] w-full translate-x-full"
+          class="absolute left-0 top-0 h-[calc(100%-210px)] w-full translate-x-full bg-beige"
         />
       </main>
     </div>
