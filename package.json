@@ -14,6 +14,7 @@
     "@pinia/nuxt": "^0.5.1",
     "class-variance-authority": "^0.7.0",
     "embla-carousel-vue": "^8.0.2",
+    "embla-carousel-wheel-gestures": "^8.0.0-rc05",
     "nuxt": "^3.11.2",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",

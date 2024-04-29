@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import emblaCarouselVue from 'embla-carousel-vue'
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 import { PropType } from 'vue'
 import CustomImage from '@/components/shared/custom-image.vue'
 
@@ -11,7 +12,9 @@ defineProps({
 })
 
 const [emblaRef, emblaApi] = emblaCarouselVue({ loop: false })
-const [thumbsRef, thumbsApi] = emblaCarouselVue({ loop: false, axis: 'y', slidesToScroll: 1 })
+const [thumbsRef, thumbsApi] = emblaCarouselVue({ loop: false, axis: 'y', slidesToScroll: 1 }, [
+  WheelGesturesPlugin()
+])
 
 watchEffect(() => {
   if (emblaApi.value && thumbsApi.value) {
