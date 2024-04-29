@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import LoginModal from '@/components/login-modal.vue'
+import RegistrationModal from '@/components/registration-modal.vue'
 import CustomButton from '@/components/shared/button/custom-button.vue'
 import CustomImage from '@/components/shared/custom-image.vue'
 import CustomText from '@/components/shared/custom-text.vue'
@@ -15,6 +17,27 @@ const navLinks = [
     href: '/contacts'
   }
 ]
+
+const isShowLoginModal = ref(false)
+const isShowRegistrationModal = ref(false)
+
+const toggleLoginModal = () => {
+  isShowLoginModal.value = !isShowLoginModal.value
+}
+
+const toggleRegistrationModal = () => {
+  isShowRegistrationModal.value = !isShowRegistrationModal.value
+}
+
+const closeRegistrationAndOpenLoginModal = () => {
+  isShowRegistrationModal.value = false
+  isShowLoginModal.value = true
+}
+
+const closeLoginAndOpenRegistrationModal = () => {
+  isShowLoginModal.value = false
+  isShowRegistrationModal.value = true
+}
 </script>
 
 <template>
@@ -42,10 +65,21 @@ const navLinks = [
           <CustomInput placeholder="Поиск..." icon="shared/search" />
           <div class="flex items-center gap-4">
             <IconLink to="/basket" icon="shared/cart" />
-            <CustomButton> Иванов Иван</CustomButton>
+            <CustomButton @click="toggleLoginModal"> Иванов Иван</CustomButton>
           </div>
         </div>
       </div>
     </div>
+    <RegistrationModal
+      @close-registration-modal="toggleRegistrationModal"
+      @change-modal="closeRegistrationAndOpenLoginModal"
+      :open="isShowRegistrationModal"
+    />
+
+    <LoginModal
+      @close-login-modal="toggleLoginModal"
+      @change-modal="closeLoginAndOpenRegistrationModal"
+      :open="isShowLoginModal"
+    />
   </header>
 </template>
