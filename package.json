@@ -13,13 +13,18 @@
     "@headlessui/vue": "^1.7.21",
     "@nuxt/image": "^1.6.0",
     "@pinia/nuxt": "^0.5.1",
+    "@vee-validate/zod": "^4.12.6",
     "class-variance-authority": "^0.7.0",
+    "dayjs": "^1.11.11",
     "embla-carousel-vue": "^8.0.2",
     "embla-carousel-wheel-gestures": "^8.0.0-rc05",
     "nuxt": "^3.11.2",
     "pinia": "^2.1.7",
+    "vee-validate": "^4.12.6",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue3-toastify": "^0.2.1",
+    "zod": "^3.23.5"
   },
   "devDependencies": {
     "@neodx/svg": "^0.7.0",

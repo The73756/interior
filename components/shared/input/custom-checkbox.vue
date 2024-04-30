@@ -25,7 +25,7 @@ defineProps({
       class="checkbox-input peer sr-only"
     />
     <span
-      class="icon-size bg-light size-7 rounded-[10px] border border-current outline outline-2 outline-offset-1 outline-transparent peer-checked:bg-current peer-focus:outline-current"
+      class="icon-size size-7 rounded-[10px] border border-current bg-light outline outline-2 outline-offset-1 outline-transparent peer-checked:bg-current peer-focus:outline-current"
     />
     <CustomIcon
       name="shared/check"

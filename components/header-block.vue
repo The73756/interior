@@ -6,6 +6,7 @@ import CustomImage from '@/components/shared/custom-image.vue'
 import CustomText from '@/components/shared/custom-text.vue'
 import CustomInput from '@/components/shared/input/custom-input.vue'
 import IconLink from '@/components/shared/link/icon-link.vue'
+import { useUserStore } from '@/store/user'
 
 const navLinks = [
   {
@@ -17,6 +18,9 @@ const navLinks = [
     href: '/contacts'
   }
 ]
+
+const userStore = useUserStore()
+const { user, isAuth } = storeToRefs(userStore)
 
 const isShowLoginModal = ref(false)
 const isShowRegistrationModal = ref(false)
@@ -41,7 +45,7 @@ const closeLoginAndOpenRegistrationModal = () => {
 </script>
 
 <template>
-  <header class="text-light sticky top-0 z-10 flex h-40 w-full justify-center bg-brown py-6">
+  <header class="sticky top-0 z-10 flex h-40 w-full justify-center bg-brown py-6 text-light">
     <div class="container flex flex-col gap-6">
       <div class="ml-auto">
         <nav>
@@ -65,7 +69,9 @@ const closeLoginAndOpenRegistrationModal = () => {
           <CustomInput placeholder="Поиск..." icon="shared/search" />
           <div class="flex items-center gap-4">
             <IconLink to="/basket" icon="shared/cart" />
-            <CustomButton @click="toggleLoginModal"> Иванов Иван</CustomButton>
+
+            <CustomButton v-if="isAuth"> {{ user?.name }} {{ user?.surname }} </CustomButton>
+            <CustomButton v-else @click="toggleLoginModal">Войти</CustomButton>
           </div>
         </div>
       </div>
