@@ -2,19 +2,14 @@
 import ProductCard from '@/components/card/product-card.vue'
 import PaginationBlock from '@/components/pagination/pagination-block.vue'
 import CustomIcon from '@/components/shared/icon/custom-icon.vue'
-import { Product } from '@/types/product'
+import { useProductStore } from '@/store/product'
 
-const products = ref<Product[]>([])
+const productStore = useProductStore()
 
-for (let i = 1; i <= 20; i++) {
-  products.value.push({
-    id: i.toString(),
-    title: `Product ${i}`,
-    price: 100 * i,
-    image:
-      'https://ru-apple.com.ru/image/cache/catalog/products_images/Apple-iPhone-14-Pro-Max-Space-Black-1-1000x1000.png'
-  })
-}
+const route = useRoute()
+await useAsyncData('products', () => productStore.getProducts(route.params.slug))
+
+const { products } = productStore
 </script>
 
 <template>
@@ -29,7 +24,7 @@ for (let i = 1; i <= 20; i++) {
         <CustomIcon class="text-24-500" name="shared/down" />
       </button>
     </div>
-    <div class="grid-cols-auto-fill grid gap-5">
+    <div class="grid grid-cols-auto-fill gap-5">
       <ProductCard v-for="product in products" :key="product.id" :product="product" />
     </div>
     <PaginationBlock class="pb-10 pt-[70px]" />

@@ -44,6 +44,7 @@ const emits = defineEmits(['click-button'])
       <button
         v-if="buttonText"
         @click="emits('click-button')"
+        type="button"
         class="flex h-6 items-center justify-center rounded-md bg-brown-red px-5 text-18-700 lowercase text-light transition-colors hover:bg-brown"
       >
         {{ buttonText }}

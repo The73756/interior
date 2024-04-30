@@ -50,7 +50,7 @@ const handleClose = () => {
           @click="handleClose"
           title="Закрыть"
           type="button"
-          class="ring-basic-hover focus:outline-basic text-24-700 text-light absolute right-4 top-2 z-10 outline-none transition-colors hover:text-white focus:outline focus:outline-offset-1"
+          class="ring-basic-hover focus:outline-basic absolute right-4 top-2 z-10 text-24-700 text-light outline-none transition-colors hover:text-white focus:outline focus:outline-offset-1"
           :class="closeClass"
         >
           <CustomIcon name="shared/close" />
@@ -62,7 +62,7 @@ const handleClose = () => {
           v-if="title"
           size="32"
           tag="h2"
-          :class="['text-light mb-4 text-center', titleClass]"
+          :class="['mb-4 text-center text-light', titleClass]"
         >
           {{ title }}
         </CustomTitle>
