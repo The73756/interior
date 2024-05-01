@@ -35,8 +35,8 @@ const total = computed(() => {
 <template>
   <div class="flex h-full flex-col">
     <div class="mb-6">
-      <h2 class="text-light text-5xl font-bold">Корзина</h2>
-      <p class="text-light text-18-500">
+      <h2 class="text-5xl font-bold text-light">Корзина</h2>
+      <p class="text-18-500 text-light">
         {{ products.length }} {{ plural(products.length, ['товар', 'товара', 'товаров']) }}
       </p>
     </div>

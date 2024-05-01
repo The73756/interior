@@ -18,8 +18,8 @@ defineProps({
   <button
     :class="
       isBig
-        ? 'text-24-700 bg-light hover:text-light h-12 text-brown-red hover:bg-brown-red'
-        : 'text-16-600 text-light h-9 bg-brown-red hover:bg-brown'
+        ? 'h-12 bg-light text-24-700 text-brown-red hover:bg-brown-red hover:text-light'
+        : 'h-9 bg-brown-red text-16-600 text-light hover:bg-brown'
     "
     class="flex w-full items-center justify-between rounded-2xl px-4 transition-colors"
   >

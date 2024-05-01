@@ -25,11 +25,11 @@ const links = ref([
 </script>
 
 <template>
-  <footer class="text-light h-[210px] bg-brown py-4">
+  <footer class="h-[210px] bg-brown py-4 text-light">
     <div class="container flex h-full w-full justify-between">
       <div class="flex h-full gap-10">
         <div v-for="link in links" :key="link.title">
-          <h3 class="text-24-700 mb-1">{{ link.title }}</h3>
+          <h3 class="mb-1 text-24-700">{{ link.title }}</h3>
           <ul>
             <li v-for="item in link.items" :key="item.label">
               <NuxtLink class="text-16-500 hover:underline" :to="item.to">{{

@@ -6,7 +6,6 @@ import { z } from 'zod'
 import { Category } from '@/api/services/categories/type'
 import BgModalWrapper from '@/components/modal/bg-modal-wrapper.vue'
 import CustomButton from '@/components/shared/button/custom-button.vue'
-import IconButton from '@/components/shared/button/icon-button.vue'
 import CustomCombobox from '@/components/shared/custom-combobox.vue'
 import CustomImage from '@/components/shared/custom-image.vue'
 import CustomIcon from '@/components/shared/icon/custom-icon.vue'
@@ -65,6 +64,8 @@ const onSubmit = handleSubmit(async (values) => {
     emits('close-create-product-modal')
     toast.success('Продукт успешно создан')
     resetForm()
+    selectedCategory.value = null
+    productImages.value = []
   }
 })
 

@@ -55,7 +55,7 @@ const activePaymentTab = ref<Tab>(paymentTabs.value[0])
 
 <template>
   <div>
-    <h2 class="text-light mb-10 text-5xl font-bold">Оформление заказа</h2>
+    <h2 class="mb-10 text-5xl font-bold text-light">Оформление заказа</h2>
 
     <div class="flex gap-10">
       <div class="w-full">
@@ -75,12 +75,12 @@ const activePaymentTab = ref<Tab>(paymentTabs.value[0])
         </div>
 
         <div class="mb-4 justify-start rounded-2xl">
-          <h3 class="text-24-700 text-light mb-2">Выберите способ оплаты</h3>
+          <h3 class="mb-2 text-24-700 text-light">Выберите способ оплаты</h3>
           <CheckoutTabs v-model="activePaymentTab" :tabs="paymentTabs" />
         </div>
       </div>
-      <div class="bg-light h-fit rounded-5 p-6">
-        <h3 class="text-24-700 mb-2 text-brown-red">Ваш заказ</h3>
+      <div class="h-fit rounded-5 bg-light p-6">
+        <h3 class="mb-2 text-24-700 text-brown-red">Ваш заказ</h3>
         <div class="flex items-center justify-between text-brown-red">
           <span class="text-18-500">Товары на сумму</span>
           <span class="text-20-700 text-brown">{{ formatPrice(20000) }}</span>

@@ -2,7 +2,7 @@
 import { BaseFieldProps, GenericObject } from 'vee-validate'
 import { ref, onMounted, watch, nextTick } from 'vue'
 
-const props = defineProps({
+defineProps({
   placeholder: {
     type: String,
     default: ''

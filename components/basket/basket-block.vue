@@ -18,7 +18,7 @@ defineProps({
 
 <template>
   <div>
-    <div class="grid-cols-auto-fill grid gap-5">
+    <div class="grid grid-cols-auto-fill gap-5">
       <ProductCard v-for="product in products" :key="product.id" :product="product" />
     </div>
 

@@ -1,5 +1,10 @@
 import { apiInstance } from '@/api/instance'
-import { CreateProductParams, GetProductsParams, Product } from '@/api/services/product/type'
+import {
+  CreateProductParams,
+  GetProductsParams,
+  Product,
+  ProductGroup
+} from '@/api/services/product/type'
 
 export const createProductService = (params: CreateProductParams) => {
   return apiInstance<Product>('/products', {
@@ -11,7 +16,12 @@ export const createProductService = (params: CreateProductParams) => {
 export const getProductsService = (params?: GetProductsParams) => {
   return apiInstance<Product[]>('/products', {
     method: 'GET',
-    query: params
+    query: {
+      categorySlug: params?.categorySlug,
+      q: params?.search,
+      _limit: params?.limit,
+      _page: params?.page
+    }
   })
 }
 
@@ -20,6 +30,16 @@ export const getProductDetailsService = (id: string) => {
     method: 'GET',
     params: {
       id
+    }
+  })
+}
+
+export const getProductsGroupService = () => {
+  return apiInstance<ProductGroup[]>('/categories', {
+    method: 'GET',
+    query: {
+      _embed: 'products',
+      limit: 5
     }
   })
 }

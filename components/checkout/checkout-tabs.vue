@@ -32,7 +32,7 @@ const handleClick = (tab: Tab) => {
       :class="
         tab.value === model?.value
           ? 'bg-yellow hover:bg-yellow'
-          : 'bg-light hover:text-light hover:bg-brown-red'
+          : 'bg-light hover:bg-brown-red hover:text-light'
       "
       class="text mx-auto flex h-[38px] w-full items-center justify-between gap-6 rounded-2xl px-4 text-brown-red transition-colors disabled:bg-grey disabled:text-white"
     >

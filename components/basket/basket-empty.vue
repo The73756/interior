@@ -11,12 +11,12 @@ import CustomIcon from '@/components/shared/icon/custom-icon.vue'
       src="/images/basket-empty.svg"
       alt="Корзина пуста"
     />
-    <h2 class="text-light text-32-500 font-bold">Корзина пуста</h2>
-    <p class="text-light text-18-400">Вы еще ничего не добавляли в корзину</p>
+    <h2 class="text-32-500 font-bold text-light">Корзина пуста</h2>
+    <p class="text-18-400 text-light">Вы еще ничего не добавляли в корзину</p>
 
     <NuxtLink
       to="/"
-      class="btn btn-primary bg-light text-18-500 hover:text-light mt-6 flex items-center gap-2 rounded-2xl px-4 py-2 pl-2 font-bold text-brown-red transition-colors hover:bg-brown-red"
+      class="btn btn-primary mt-6 flex items-center gap-2 rounded-2xl bg-light px-4 py-2 pl-2 text-18-500 font-bold text-brown-red transition-colors hover:bg-brown-red hover:text-light"
     >
       <CustomIcon name="shared/arrow" class="rotate-180 text-32-500" />
       Вернуться на главную

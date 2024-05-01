@@ -10,7 +10,7 @@ import SidebarBlock from '@/components/sidebar/sidebar-block.vue'
     <div class="container flex">
       <SidebarBlock />
       <main class="relative ml-[190px] flex min-h-[calc(100vh-160px)] w-full flex-col bg-beige">
-        <div class="p-5">
+        <div class="flex flex-1 flex-col p-5">
           <slot />
         </div>
         <FooterBlock class="mt-auto" />

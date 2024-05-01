@@ -1,6 +1,5 @@
 import { User } from '@/api/services/auth/type'
 import { KEY_COOKIE_ACCESS_TOKEN } from '@/constants/keys'
-import { useCategoryStore } from '@/store/categories'
 import { useUserStore } from '@/store/user'
 
 export default defineNuxtRouteMiddleware(async (to) => {

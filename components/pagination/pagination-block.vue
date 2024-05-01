@@ -1,27 +1,54 @@
 <script lang="ts" setup>
 import CustomIcon from '@/components/shared/icon/custom-icon.vue'
+import { useProductStore } from '@/store/product'
 
-const activePage = ref(1)
+const productStore = useProductStore()
+const { page, totalPages } = storeToRefs(productStore)
+
+const isPrevDisabled = computed(() => page.value === 1)
+const isNextDisabled = computed(() => page.value === totalPages.value)
+
+const onClickPage = (page: number) => {
+  productStore.setPage(page)
+}
+
+const onClickNext = () => {
+  if (page.value === totalPages.value) return
+  productStore.setPage(page.value + 1)
+}
+
+const onClickPrev = () => {
+  if (page.value === 1) return
+  productStore.setPage(page.value - 1)
+}
 </script>
 
 <template>
   <div class="flex w-full justify-center gap-4">
-    <button class="text-light text-20-700 transition-colors hover:text-brown-red" title="Вперед">
+    <button
+      @click="onClickPrev"
+      :disabled="isPrevDisabled"
+      class="text-20-700 text-light transition-colors hover:text-brown-red disabled:text-brown-red"
+      title="Назад"
+    >
       <CustomIcon name="shared/arrow-filled" />
     </button>
     <div class="flex gap-4">
       <button
-        v-for="(_, index) in 10"
-        :key="index"
+        v-for="item in totalPages"
+        :key="item"
+        @click="onClickPage(item)"
         class="text-24-700 transition-colors hover:text-brown-red"
-        :class="activePage === index + 1 ? 'text-brown-red' : 'text-light'"
+        :class="page === item ? 'text-brown-red' : 'text-light'"
       >
-        {{ index + 1 }}
+        {{ item }}
       </button>
     </div>
     <button
-      class="text-light text-20-700 rotate-180 transition-colors hover:text-brown-red"
-      title="Назад"
+      @click="onClickNext"
+      :disabled="isNextDisabled"
+      class="rotate-180 text-20-700 text-light transition-colors hover:text-brown-red disabled:text-brown-red"
+      title="Вперед"
     >
       <CustomIcon name="shared/arrow-filled" />
     </button>

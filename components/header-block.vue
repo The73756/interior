@@ -6,6 +6,7 @@ import CustomImage from '@/components/shared/custom-image.vue'
 import CustomText from '@/components/shared/custom-text.vue'
 import CustomInput from '@/components/shared/input/custom-input.vue'
 import IconLink from '@/components/shared/link/icon-link.vue'
+import { useProductStore } from '@/store/product'
 import { useUserStore } from '@/store/user'
 
 const navLinks = [
@@ -16,14 +17,26 @@ const navLinks = [
   {
     label: 'Контакты',
     href: '/contacts'
+  },
+  {
+    label: 'Админ панель',
+    href: '/admin'
   }
 ]
 
 const userStore = useUserStore()
+const productStore = useProductStore()
 const { user, isAuth } = storeToRefs(userStore)
+const { search } = storeToRefs(productStore)
 
 const isShowLoginModal = ref(false)
 const isShowRegistrationModal = ref(false)
+const searchInput = computed({
+  get: () => search.value,
+  set: (value) => {
+    productStore.setSearch(value)
+  }
+})
 
 const toggleLoginModal = () => {
   isShowLoginModal.value = !isShowLoginModal.value
@@ -62,11 +75,16 @@ const closeLoginAndOpenRegistrationModal = () => {
       </div>
 
       <div class="flex items-center gap-6">
-        <NuxtLink class="w block h-full" to="/" title="На главную">
+        <NuxtLink
+          @click="productStore.setSearch('')"
+          class="w block h-full"
+          to="/"
+          title="На главную"
+        >
           <CustomImage src="/images/logo.svg" width="200" height="auto" alt="Логотип компании" />
         </NuxtLink>
         <div class="flex w-full justify-between gap-5">
-          <CustomInput placeholder="Поиск..." icon="shared/search" />
+          <CustomInput v-model="searchInput" placeholder="Поиск..." icon="shared/search" />
           <div class="flex items-center gap-4">
             <IconLink to="/basket" icon="shared/cart" />
 
