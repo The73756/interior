@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import LoginModal from '@/components/login-modal.vue'
+import SubmitModal from '@/components/modal/submit-modal.vue'
 import RegistrationModal from '@/components/registration-modal.vue'
 import CustomButton from '@/components/shared/button/custom-button.vue'
 import CustomImage from '@/components/shared/custom-image.vue'
@@ -13,15 +14,18 @@ import { useUserStore } from '@/store/user'
 const navLinks = [
   {
     label: 'Новости сайта',
-    href: '/news'
+    href: '/news',
+    isPrivate: false
   },
   {
     label: 'Контакты',
-    href: '/contacts'
+    href: '/contacts',
+    isPrivate: false
   },
   {
     label: 'Админ панель',
-    href: '/admin'
+    href: '/admin',
+    isPrivate: true
   }
 ]
 
@@ -30,7 +34,9 @@ const productStore = useProductStore()
 const basketStore = useBasketStore()
 const { user, isAuth } = storeToRefs(userStore)
 const { search } = storeToRefs(productStore)
-const { basket } = storeToRefs(basketStore)
+const { basket, isShowBasketAuthModal } = storeToRefs(basketStore)
+
+const showSubmitModal = ref(false)
 
 const isShowLoginModal = ref(false)
 const isShowRegistrationModal = ref(false)
@@ -40,6 +46,10 @@ const searchInput = computed({
     productStore.setSearch(value)
   }
 })
+
+const toggleSubmitModal = () => {
+  showSubmitModal.value = !showSubmitModal.value
+}
 
 const toggleLoginModal = () => {
   isShowLoginModal.value = !isShowLoginModal.value
@@ -62,6 +72,12 @@ const closeLoginAndOpenRegistrationModal = () => {
 const handleLogout = () => {
   userStore.logout()
   basketStore.resetBasket()
+  showSubmitModal.value = false
+}
+
+const handleAuth = () => {
+  basketStore.closeBasketAuthModal()
+  isShowLoginModal.value = true
 }
 </script>
 
@@ -71,13 +87,15 @@ const handleLogout = () => {
       <div class="ml-auto">
         <nav>
           <ul class="flex gap-5">
-            <li v-for="link in navLinks" :key="link.href">
-              <NuxtLink :to="link.href" class="hover:underline">
-                <CustomText size="18" as="span" weight="bold">
-                  {{ link.label }}
-                </CustomText>
-              </NuxtLink>
-            </li>
+            <template v-for="link in navLinks" :key="link.href">
+              <li v-if="!link.isPrivate || isAuth">
+                <NuxtLink :to="link.href" class="hover:underline">
+                  <CustomText size="18" as="span" weight="bold">
+                    {{ link.label }}
+                  </CustomText>
+                </NuxtLink>
+              </li>
+            </template>
           </ul>
         </nav>
       </div>
@@ -95,7 +113,7 @@ const handleLogout = () => {
           <CustomInput v-model="searchInput" placeholder="Поиск..." icon="shared/search" />
           <div class="flex items-center gap-4">
             <div class="relative">
-              <IconLink to="/basket" icon="shared/cart" />
+              <IconLink v-if="isAuth" title="Корзина" to="/basket" icon="shared/cart" />
               <div
                 v-if="basket.length"
                 class="absolute -top-1 right-0 flex h-5 w-5 translate-x-1/2 items-center justify-center rounded-full bg-red-500 text-12-500 font-bold text-light"
@@ -106,7 +124,7 @@ const handleLogout = () => {
 
             <CustomButton
               v-if="isAuth"
-              @click="handleLogout"
+              @click="toggleSubmitModal"
               class="relative after:absolute after:inset-0 after:flex after:items-center after:justify-center after:rounded-2xl after:border-2 after:border-light after:bg-brown-red after:text-light after:opacity-0 after:transition-opacity after:content-['Выйти'] hover:after:opacity-100 focus-visible:after:opacity-100"
             >
               {{ user?.name }} {{ user?.surname }}
@@ -126,6 +144,26 @@ const handleLogout = () => {
       @close-login-modal="toggleLoginModal"
       @change-modal="closeLoginAndOpenRegistrationModal"
       :open="isShowLoginModal"
+    />
+
+    <SubmitModal
+      @click-submit-button="handleLogout"
+      @close-submit-modal="toggleSubmitModal"
+      @click-reject-button="toggleSubmitModal"
+      :open="showSubmitModal"
+      title="Выход из профиля"
+      desc="Вы уверены что хотите выйти?"
+      submit-button-text="Выйти"
+    />
+
+    <SubmitModal
+      @click-submit-button="handleAuth"
+      @close-submit-modal="basketStore.closeBasketAuthModal"
+      @click-reject-button="basketStore.closeBasketAuthModal"
+      :open="isShowBasketAuthModal"
+      title="Авторизация"
+      desc="Чтобы добавить в корзину, вы должны быть авторизованы!"
+      submit-button-text="Авторизоваться"
     />
   </header>
 </template>

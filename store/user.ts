@@ -10,6 +10,7 @@ export const useUserStore = defineStore('user', () => {
   const user = ref<User | null>(null)
 
   const isAuth = computed(() => Boolean(user.value))
+  const route = useRoute()
 
   const registration = async (params: RegistrationParams) => {
     const { response } = await handleAsync(() => registrationService(params), isLoading, error)
@@ -45,6 +46,10 @@ export const useUserStore = defineStore('user', () => {
     const accessCookie = useCookie(KEY_COOKIE_ACCESS_TOKEN)
     accessCookie.value = ''
     user.value = null
+
+    if (route.path === '/basket' || route.path === '/admin') {
+      navigateTo('/')
+    }
   }
 
   return {

@@ -14,6 +14,7 @@ export const useBasketStore = defineStore('basket', () => {
   const error = ref('')
   const basket = ref<BasketProduct[]>([])
   const isBasketInit = ref(false)
+  const isShowBasketAuthModal = ref(false)
 
   const userStore = useUserStore()
   const { user } = storeToRefs(userStore)
@@ -21,6 +22,14 @@ export const useBasketStore = defineStore('basket', () => {
   const basketTotal = computed(() =>
     basket.value.reduce((acc, product) => acc + product.count * product.price, 0)
   )
+
+  const openBasketAuthModal = () => {
+    isShowBasketAuthModal.value = true
+  }
+
+  const closeBasketAuthModal = () => {
+    isShowBasketAuthModal.value = false
+  }
 
   const getProductFromBasket = (id: number) =>
     computed(() => basket.value.find((product) => Number(product.productId) === Number(id)))
@@ -34,7 +43,10 @@ export const useBasketStore = defineStore('basket', () => {
   }
 
   const addToBasket = async (product: Product) => {
-    if (!user.value?.id) return console.log('User is not authorized')
+    if (!user.value?.id) {
+      openBasketAuthModal()
+      return
+    }
 
     const { response } = await handleAsync(
       () => addToBasketService(product, user.value!.id),
@@ -65,17 +77,25 @@ export const useBasketStore = defineStore('basket', () => {
     basket.value = []
   }
 
+  const localDeleteFromBasket = (id: number) => {
+    basket.value = basket.value.filter((product) => product.productId !== id)
+  }
+
   return {
     error,
     isLoading,
     basket,
     isBasketInit,
+    basketTotal,
+    isShowBasketAuthModal,
     getBasket,
     addToBasket,
     deleteFromBasket,
     updateBasketProductCount,
     getProductFromBasket,
     resetBasket,
-    basketTotal
+    localDeleteFromBasket,
+    openBasketAuthModal,
+    closeBasketAuthModal
   }
 })

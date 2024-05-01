@@ -21,7 +21,10 @@ const handleResetSearch = () => {
 
 <template>
   <div class="flex flex-1 flex-col">
-    <h2 class="mb-1 text-5xl font-bold text-light">Поиск</h2>
+    <div class="flex items-center justify-between">
+      <h2 class="mb-1 text-5xl font-bold text-light">Поиск</h2>
+      <SortBlock />
+    </div>
     <div v-if="total === 0" class="m-auto flex flex-col items-center justify-center">
       <CustomImage
         class="mb-4"
@@ -47,7 +50,6 @@ const handleResetSearch = () => {
         По запросу "<span class="text-brown">{{ search }} </span>" найдено
         <span>{{ total }} {{ plural(total, ['товар', 'товара', 'товаров']) }}</span>
       </div>
-      <SortBlock class="mb-10" />
       <div class="grid grid-cols-auto-fill gap-5">
         <ProductCard v-for="product in products" :key="product.id" :product="product" />
       </div>

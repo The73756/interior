@@ -6,6 +6,7 @@ import {
 } from '@/api/services/product'
 import { CreateProductParams, Product, ProductGroup } from '@/api/services/product/type'
 import { searchSortItem, SortItem, sortParams } from '@/components/sort/sort-params'
+import { useBasketStore } from '@/store/basket'
 import { ComboboxItem } from '@/types/combobox'
 import { handleAsync } from '@/utils/handle-async'
 
@@ -24,6 +25,8 @@ export const useProductStore = defineStore('product', () => {
 
   const search = ref(route.query.search || '')
   const page = ref(Number(route.query.page) || 1)
+
+  const basketStore = useBasketStore()
 
   const currentSort = ref<SortItem>(
     searchSortItem(route.query.sort as string, route.query.order as string)
@@ -134,6 +137,7 @@ export const useProductStore = defineStore('product', () => {
     const { response } = await handleAsync(() => deleteProductService(id), isLoading, error)
     if (error.value || !response) return
     products.value = products.value.filter((product) => product.id !== id)
+    basketStore.localDeleteFromBasket(id)
   }
 
   return {

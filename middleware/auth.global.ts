@@ -10,8 +10,12 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const basketStore = useBasketStore()
   userStore.setUser(userCookie.value)
 
-  const { user } = storeToRefs(userStore)
+  const { user, isAuth } = storeToRefs(userStore)
   const { isBasketInit } = storeToRefs(basketStore)
+
+  if ((to.path === '/basket' || to.path === '/admin') && !isAuth.value) {
+    return navigateTo('/')
+  }
 
   if (user.value?.id && !isBasketInit) {
     await basketStore.getBasket()
