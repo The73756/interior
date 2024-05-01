@@ -3,6 +3,7 @@ import ProductCard from '@/components/card/product-card.vue'
 import PaginationBlock from '@/components/pagination/pagination-block.vue'
 import CustomImage from '@/components/shared/custom-image.vue'
 import CustomIcon from '@/components/shared/icon/custom-icon.vue'
+import SortBlock from '@/components/sort/sort-block.vue'
 import { plural } from '@/helpers/plural'
 import { useProductStore } from '@/store/product'
 
@@ -46,17 +47,7 @@ const handleResetSearch = () => {
         По запросу "<span class="text-brown">{{ search }} </span>" найдено
         <span>{{ total }} {{ plural(total, ['товар', 'товара', 'товаров']) }}</span>
       </div>
-
-      <!--<div class="mb-10 flex gap-8">-->
-      <!--  <button class="flex items-center gap-1 text-18-700 text-white hover:underline">-->
-      <!--    Сортировка-->
-      <!--    <CustomIcon class="text-24-500" name="shared/down" />-->
-      <!--  </button>-->
-      <!--  <button class="flex items-center gap-1 text-18-700 text-white hover:underline">-->
-      <!--    Фильтры-->
-      <!--    <CustomIcon class="text-24-500" name="shared/down" />-->
-      <!--  </button>-->
-      <!--</div>-->
+      <SortBlock class="mb-10" />
       <div class="grid grid-cols-auto-fill gap-5">
         <ProductCard v-for="product in products" :key="product.id" :product="product" />
       </div>

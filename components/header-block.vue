@@ -6,6 +6,7 @@ import CustomImage from '@/components/shared/custom-image.vue'
 import CustomText from '@/components/shared/custom-text.vue'
 import CustomInput from '@/components/shared/input/custom-input.vue'
 import IconLink from '@/components/shared/link/icon-link.vue'
+import { useBasketStore } from '@/store/basket'
 import { useProductStore } from '@/store/product'
 import { useUserStore } from '@/store/user'
 
@@ -26,8 +27,10 @@ const navLinks = [
 
 const userStore = useUserStore()
 const productStore = useProductStore()
+const basketStore = useBasketStore()
 const { user, isAuth } = storeToRefs(userStore)
 const { search } = storeToRefs(productStore)
+const { basket } = storeToRefs(basketStore)
 
 const isShowLoginModal = ref(false)
 const isShowRegistrationModal = ref(false)
@@ -54,6 +57,11 @@ const closeRegistrationAndOpenLoginModal = () => {
 const closeLoginAndOpenRegistrationModal = () => {
   isShowLoginModal.value = false
   isShowRegistrationModal.value = true
+}
+
+const handleLogout = () => {
+  userStore.logout()
+  basketStore.resetBasket()
 }
 </script>
 
@@ -86,9 +94,23 @@ const closeLoginAndOpenRegistrationModal = () => {
         <div class="flex w-full justify-between gap-5">
           <CustomInput v-model="searchInput" placeholder="Поиск..." icon="shared/search" />
           <div class="flex items-center gap-4">
-            <IconLink to="/basket" icon="shared/cart" />
+            <div class="relative">
+              <IconLink to="/basket" icon="shared/cart" />
+              <div
+                v-if="basket.length"
+                class="absolute -top-1 right-0 flex h-5 w-5 translate-x-1/2 items-center justify-center rounded-full bg-red-500 text-12-500 font-bold text-light"
+              >
+                {{ basket.length }}
+              </div>
+            </div>
 
-            <CustomButton v-if="isAuth"> {{ user?.name }} {{ user?.surname }} </CustomButton>
+            <CustomButton
+              v-if="isAuth"
+              @click="handleLogout"
+              class="relative after:absolute after:inset-0 after:flex after:items-center after:justify-center after:rounded-2xl after:border-2 after:border-light after:bg-brown-red after:text-light after:opacity-0 after:transition-opacity after:content-['Выйти'] hover:after:opacity-100 focus-visible:after:opacity-100"
+            >
+              {{ user?.name }} {{ user?.surname }}
+            </CustomButton>
             <CustomButton v-else @click="toggleLoginModal">Войти</CustomButton>
           </div>
         </div>

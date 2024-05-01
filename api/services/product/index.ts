@@ -18,9 +18,11 @@ export const getProductsService = (params?: GetProductsParams) => {
     method: 'GET',
     query: {
       categorySlug: params?.categorySlug,
-      q: params?.search,
+      q: params?.search || null,
       _limit: params?.limit,
-      _page: params?.page
+      _page: params?.page,
+      _sort: params?.sortField,
+      _order: params?.sortOrder
     }
   })
 }

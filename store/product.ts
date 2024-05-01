@@ -4,6 +4,7 @@ import {
   getProductsService
 } from '@/api/services/product'
 import { CreateProductParams, Product, ProductGroup } from '@/api/services/product/type'
+import { searchSortItem, SortItem, sortParams } from '@/components/sort/sort-params'
 import { handleAsync } from '@/utils/handle-async'
 
 export const useProductStore = defineStore('product', () => {
@@ -14,13 +15,22 @@ export const useProductStore = defineStore('product', () => {
   const currentCategorySlug = ref()
   const total = ref(0)
   const limit = ref(5)
+
   const router = useRouter()
   const route = useRoute()
 
   const search = ref(route.query.search || '')
   const page = ref(Number(route.query.page) || 1)
 
+  const currentSort = ref<SortItem>(
+    searchSortItem(route.query.sort as string, route.query.order as string)
+  )
+
   const totalPages = computed(() => Math.ceil(total.value / limit.value))
+
+  const setProductsTotal = (newTotal: number) => {
+    total.value = newTotal
+  }
 
   const getProducts = async (categorySlug?: string) => {
     if (categorySlug) {
@@ -34,7 +44,9 @@ export const useProductStore = defineStore('product', () => {
           categorySlug: currentCategorySlug.value,
           page: page.value,
           limit: limit.value,
-          search: search.value
+          search: search.value,
+          sortField: currentSort.value.value?.field,
+          sortOrder: currentSort.value.value?.order
         }),
       isLoading,
       error
@@ -43,16 +55,15 @@ export const useProductStore = defineStore('product', () => {
     products.value = response
   }
 
-  const setPage = async (newPage: number, categorySlug?: string) => {
+  const setPage = async (newPage: number) => {
     page.value = newPage
     router.push({
       query: {
-        ...router.currentRoute.value.query,
         page: newPage
       }
     })
 
-    await getProducts(categorySlug)
+    await getProducts()
   }
 
   const createProduct = async (product: CreateProductParams) => {
@@ -68,13 +79,10 @@ export const useProductStore = defineStore('product', () => {
     productGroups.value = response
   }
 
-  const setProductsTotal = (newTotal: number) => {
-    total.value = newTotal
-  }
-
   const setSearch = async (query: string) => {
     search.value = query
     page.value = 1
+    currentSort.value = sortParams[0]
 
     if (search.value.trim()) {
       if (router.currentRoute.value.path !== '/search') {
@@ -93,6 +101,22 @@ export const useProductStore = defineStore('product', () => {
     await getProducts()
   }
 
+  const setSort = async (sort: SortItem) => {
+    page.value = 1
+    currentSort.value = sort
+
+    await router.push({
+      query: {
+        ...router.currentRoute.value.query,
+        sort: sort.value?.field,
+        order: sort.value?.order,
+        page: page.value
+      }
+    })
+
+    await getProducts()
+  }
+
   return {
     getProducts,
     createProduct,
@@ -100,6 +124,7 @@ export const useProductStore = defineStore('product', () => {
     setProductsTotal,
     setPage,
     setSearch,
+    setSort,
     error,
     isLoading,
     products,
@@ -108,6 +133,7 @@ export const useProductStore = defineStore('product', () => {
     total,
     limit,
     totalPages,
-    search
+    search,
+    currentSort
   }
 })

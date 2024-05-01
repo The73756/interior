@@ -19,11 +19,16 @@ export const useCategoryStore = defineStore('category', () => {
     categories.value.push(response)
   }
 
+  const findCategoryBySlug = (slug: string) => {
+    return categories.value.find((category) => category.slug === slug)
+  }
+
   return {
     error,
     isLoading,
     categories,
     getCategories,
-    createCategory
+    createCategory,
+    findCategoryBySlug
   }
 })

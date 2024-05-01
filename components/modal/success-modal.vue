@@ -37,9 +37,9 @@ const handleOkButtonClick = () => {
     :open="open"
     wrapper-class="flex flex-col items-center justify-center gap-6"
   >
-    <CustomImage src="/images/success.png" alt="" aria-hidden="true" width="200" height="200" />
+    <CustomImage src="/images/success.svg" alt="" aria-hidden="true" width="200" height="200" />
 
-    <CustomText size="18">{{ desc }}</CustomText>
+    <CustomText class="text-light" size="18">{{ desc }}</CustomText>
 
     <CustomButton @click="handleOkButtonClick" class="w-full">Хорошо</CustomButton>
   </BgModalWrapper>

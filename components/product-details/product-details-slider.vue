@@ -50,7 +50,7 @@ const onThumbsClick = (index: number) => {
           :key="index"
           class="embla__slide flex h-full items-center justify-center overflow-hidden rounded-5 bg-white"
         >
-          <CustomImage :src="image" />
+          <CustomImage class="size-full" img-class="size-full object-cover" :src="image" />
         </div>
       </div>
     </div>

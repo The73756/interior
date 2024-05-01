@@ -1,7 +1,7 @@
 import { Category } from '@/api/services/categories/type'
 
 export type Product = {
-  id: string
+  id: number
   title: string
   price: number
   images: string[]
@@ -17,6 +17,8 @@ export type GetProductsParams = {
   page: number
   limit: number
   search: string
+  sortField?: string
+  sortOrder?: string
 }
 
 export type ProductGroup = {

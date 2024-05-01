@@ -3,7 +3,7 @@ import { definePageMeta } from '@/.nuxt/imports'
 import BasketBlock from '@/components/basket/basket-block.vue'
 import BasketEmpty from '@/components/basket/basket-empty.vue'
 import { plural } from '@/helpers/plural'
-import { Product } from '@/types/product'
+import { useBasketStore } from '@/store/basket'
 
 definePageMeta({
   layout: 'without-sidebar'
@@ -15,20 +15,11 @@ useHead({
   }
 })
 
-const products = ref<Product[]>([])
-
-for (let i = 1; i <= 20; i++) {
-  products.value.push({
-    id: i.toString(),
-    title: `Product ${i}`,
-    price: 100 * i,
-    image:
-      'https://ru-apple.com.ru/image/cache/catalog/products_images/Apple-iPhone-14-Pro-Max-Space-Black-1-1000x1000.png'
-  })
-}
+const basketStore = useBasketStore()
+const { basket } = storeToRefs(basketStore)
 
 const total = computed(() => {
-  return products.value.reduce((acc, product) => acc + product.price, 0)
+  return basket.value.reduce((acc, product) => acc + product.price * product.count, 0)
 })
 </script>
 
@@ -37,11 +28,11 @@ const total = computed(() => {
     <div class="mb-6">
       <h2 class="text-5xl font-bold text-light">Корзина</h2>
       <p class="text-18-500 text-light">
-        {{ products.length }} {{ plural(products.length, ['товар', 'товара', 'товаров']) }}
+        {{ basket.length }} {{ plural(basket.length, ['товар', 'товара', 'товаров']) }}
       </p>
     </div>
 
-    <BasketBlock v-if="products?.length" :total="total" :products="products" />
+    <BasketBlock v-if="basket?.length" :total="total" :products="basket" />
     <BasketEmpty v-else />
   </div>
 </template>

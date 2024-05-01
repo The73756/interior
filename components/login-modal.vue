@@ -5,6 +5,7 @@ import { z } from 'zod'
 import BgModalWrapper from '@/components/modal/bg-modal-wrapper.vue'
 import CustomButton from '@/components/shared/button/custom-button.vue'
 import ButtonInput from '@/components/shared/input/button-input.vue'
+import { useBasketStore } from '@/store/basket'
 import { useUserStore } from '@/store/user'
 import { emailValidation } from '@/utils/validation-schemas'
 
@@ -18,6 +19,7 @@ defineProps({
 })
 
 const userStore = useUserStore()
+const basketStore = useBasketStore()
 const { isLoading, error } = storeToRefs(userStore)
 
 const validationSchema = toTypedSchema(
@@ -40,6 +42,7 @@ const onSubmit = handleSubmit(async (values) => {
   await userStore.login(values)
 
   if (!error.value) {
+    await basketStore.getBasket()
     emits('close-login-modal')
   }
 })

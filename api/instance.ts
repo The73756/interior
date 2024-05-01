@@ -21,8 +21,10 @@ export const apiInstance = <T>(request: Request<T>, opts?: Options<T>): Response
       ...opts?.headers
     },
     onResponse(context) {
-      console.log(context.response.headers.get('X-Total-Count'))
-      productStore.setProductsTotal(Number(context.response.headers.get('X-Total-Count')))
+      const total = context.response.headers.get('X-Total-Count')
+      if (total) {
+        productStore.setProductsTotal(Number(total))
+      }
     }
   }
 

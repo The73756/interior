@@ -98,7 +98,7 @@ const filteredOption = computed<ComboboxItem[]>(() => {
           leave-to="opacity-0"
         >
           <ComboboxOptions
-            class="ring-border-lavender absolute z-10 mt-1 max-h-72 w-full overflow-auto rounded-2xl bg-light py-1 text-base shadow-lg ring-1 focus:outline-none sm:text-sm"
+            class="absolute z-10 mt-1 max-h-72 w-full overflow-auto rounded-2xl bg-light py-1 text-base shadow-lg ring-1 ring-yellow focus:outline-none sm:text-sm"
           >
             <div
               v-if="filteredOption.length === 0 && query !== ''"

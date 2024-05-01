@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import { definePageMeta } from '@/.nuxt/imports'
 import CheckoutTabs from '@/components/checkout/checkout-tabs.vue'
+import SuccessModal from '@/components/modal/success-modal.vue'
 import LightButton from '@/components/shared/button/light-button.vue'
 import ButtonInput from '@/components/shared/input/button-input.vue'
 import { formatPrice } from '@/helpers/price-format'
+import { useBasketStore } from '@/store/basket'
 import { Tab } from '@/types/tabs'
 
 definePageMeta({
@@ -51,6 +53,25 @@ const paymentTabs = ref<Tab[]>([
 
 const activeDeliveryTab = ref<Tab>(deliveryTabs.value[1])
 const activePaymentTab = ref<Tab>(paymentTabs.value[0])
+
+const basketStore = useBasketStore()
+const { basketTotal } = storeToRefs(basketStore)
+
+const isShowSuccessModal = ref(false)
+
+const toggleSuccessModal = () => {
+  isShowSuccessModal.value = !isShowSuccessModal.value
+}
+
+const handleOrder = () => {
+  toggleSuccessModal()
+  basketStore.resetBasket()
+}
+
+const handleOk = () => {
+  toggleSuccessModal()
+  navigateTo('/')
+}
 </script>
 
 <template>
@@ -83,7 +104,7 @@ const activePaymentTab = ref<Tab>(paymentTabs.value[0])
         <h3 class="mb-2 text-24-700 text-brown-red">Ваш заказ</h3>
         <div class="flex items-center justify-between text-brown-red">
           <span class="text-18-500">Товары на сумму</span>
-          <span class="text-20-700 text-brown">{{ formatPrice(20000) }}</span>
+          <span class="text-20-700 text-brown">{{ formatPrice(basketTotal) }}</span>
         </div>
         <div class="mb-5 flex items-center justify-between text-brown-red">
           <span class="text-18-500">Доставка</span>
@@ -91,11 +112,19 @@ const activePaymentTab = ref<Tab>(paymentTabs.value[0])
         </div>
 
         <LightButton
+          @click="handleOrder"
           custom-bg="bg-brown-red hover:bg-brown text-light"
           label="Оплатить"
-          :total="20100"
+          :total="basketTotal + 100"
         />
       </div>
     </div>
+    <SuccessModal
+      @click-ok-button="handleOk"
+      @close-success-modal="handleOk"
+      title="Ваш заказ принят!"
+      desc="Мы свяжемся с вами, чтобы уточнить детали в ближайшее время"
+      :open="isShowSuccessModal"
+    />
   </div>
 </template>

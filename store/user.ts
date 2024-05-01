@@ -41,6 +41,12 @@ export const useUserStore = defineStore('user', () => {
     user.value = data
   }
 
+  const logout = () => {
+    const accessCookie = useCookie(KEY_COOKIE_ACCESS_TOKEN)
+    accessCookie.value = ''
+    user.value = null
+  }
+
   return {
     error,
     isLoading,
@@ -48,6 +54,7 @@ export const useUserStore = defineStore('user', () => {
     user,
     registration,
     login,
-    setUser
+    setUser,
+    logout
   }
 })

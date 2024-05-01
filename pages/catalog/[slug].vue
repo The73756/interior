@@ -3,27 +3,29 @@ import ProductCard from '@/components/card/product-card.vue'
 import PaginationBlock from '@/components/pagination/pagination-block.vue'
 import CustomImage from '@/components/shared/custom-image.vue'
 import CustomIcon from '@/components/shared/icon/custom-icon.vue'
+import SortBlock from '@/components/sort/sort-block.vue'
+import { useCategoryStore } from '@/store/categories'
 import { useProductStore } from '@/store/product'
 
 const productStore = useProductStore()
+const categoryStore = useCategoryStore()
 
 const route = useRoute()
 await useAsyncData('products', () => productStore.getProducts(route.params.slug))
 
 const { products, total } = storeToRefs(productStore)
+
+const currentCategory = categoryStore.findCategoryBySlug(route.params.slug)
 </script>
 
 <template>
   <div class="flex flex-1 flex-col">
-    <div class="mb-10 flex gap-8">
-      <button class="flex items-center gap-1 text-18-700 text-white hover:underline">
-        Сортировка
-        <CustomIcon class="text-24-500" name="shared/down" />
-      </button>
-      <button class="flex items-center gap-1 text-18-700 text-white hover:underline">
-        Фильтры
-        <CustomIcon class="text-24-500" name="shared/down" />
-      </button>
+    <div class="mb-10 flex flex-wrap items-center justify-between gap-4">
+      <h2 v-if="currentCategory" class="text-5xl font-bold text-light">
+        {{ currentCategory.name }}
+      </h2>
+
+      <SortBlock />
     </div>
     <div v-if="total === 0" class="m-auto flex flex-col items-center justify-center">
       <CustomImage

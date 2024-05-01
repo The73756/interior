@@ -5,14 +5,12 @@ import ProductDetailsSlider from '@/components/product-details/product-details-s
 import BasketButton from '@/components/shared/button/basket-button.vue'
 import CollapsedText from '@/components/shared/collapsed-text.vue'
 
-const props = defineProps({
+defineProps({
   product: {
     type: Object as PropType<Product>,
     required: true
   }
 })
-
-console.log('product-details-block []', props.product)
 </script>
 
 <template>
@@ -24,7 +22,7 @@ console.log('product-details-block []', props.product)
       </h2>
       <div class="flex flex-1 flex-col">
         <CollapsedText :text="product.description" />
-        <BasketButton class="mt-auto max-w-[365px]" is-big :price="product.price" />
+        <BasketButton class="mt-auto max-w-[365px]" :product="product" is-big />
       </div>
     </div>
   </div>
