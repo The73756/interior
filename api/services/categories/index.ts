@@ -13,3 +13,12 @@ export const getCategoriesService = () => {
     method: 'GET'
   })
 }
+
+export const deleteCategoryService = (id: number) => {
+  return apiInstance<Category>(`/categories/${id}`, {
+    method: 'DELETE',
+    query: {
+      _depends: 'products'
+    }
+  })
+}

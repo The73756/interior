@@ -65,8 +65,7 @@ const filteredOption = computed<ComboboxItem[]>(() => {
             @change="query = $event.target.value"
             class="h-[45px] w-full rounded-2xl border-none bg-light py-2 pl-5 pr-10 text-18-500 leading-5 text-brown-red focus:outline-none"
             :display-value="
-              (item: unknown) =>
-                Array.isArray(item) ? '' : (selectedOption && (item as ComboboxItem).name) || ''
+              (item) => (Array.isArray(item) ? '' : (selectedOption && item.name) || '')
             "
           />
           <ComboboxButton

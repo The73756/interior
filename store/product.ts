@@ -1,10 +1,12 @@
 import {
   createProductService,
+  deleteProductService,
   getProductsGroupService,
   getProductsService
 } from '@/api/services/product'
 import { CreateProductParams, Product, ProductGroup } from '@/api/services/product/type'
 import { searchSortItem, SortItem, sortParams } from '@/components/sort/sort-params'
+import { ComboboxItem } from '@/types/combobox'
 import { handleAsync } from '@/utils/handle-async'
 
 export const useProductStore = defineStore('product', () => {
@@ -15,6 +17,7 @@ export const useProductStore = defineStore('product', () => {
   const currentCategorySlug = ref()
   const total = ref(0)
   const limit = ref(5)
+  const productsForDelete = ref<ComboboxItem[]>([])
 
   const router = useRouter()
   const route = useRoute()
@@ -117,6 +120,22 @@ export const useProductStore = defineStore('product', () => {
     await getProducts()
   }
 
+  const getProductsForDelete = async () => {
+    const { response } = await handleAsync(() => getProductsService(), isLoading, error)
+    if (error.value || !response) return
+    productsForDelete.value = response.map((product) => ({
+      name: product.title,
+      slug: String(product.id),
+      id: product.id
+    }))
+  }
+
+  const deleteProduct = async (id: number) => {
+    const { response } = await handleAsync(() => deleteProductService(id), isLoading, error)
+    if (error.value || !response) return
+    products.value = products.value.filter((product) => product.id !== id)
+  }
+
   return {
     getProducts,
     createProduct,
@@ -125,6 +144,9 @@ export const useProductStore = defineStore('product', () => {
     setPage,
     setSearch,
     setSort,
+    deleteProduct,
+    getProductsForDelete,
+    productsForDelete,
     error,
     isLoading,
     products,

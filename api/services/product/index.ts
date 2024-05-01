@@ -45,3 +45,10 @@ export const getProductsGroupService = () => {
     }
   })
 }
+
+export const deleteProductService = (id: number) => {
+  return apiInstance<Product>(`/products/${id}`, {
+    method: 'DELETE',
+    query: { _embed: 'basket' }
+  })
+}

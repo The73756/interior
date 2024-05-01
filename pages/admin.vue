@@ -2,8 +2,11 @@
 import { definePageMeta } from '@/.nuxt/imports'
 import CreateCategory from '@/components/admin/create-category.vue'
 import CreateProduct from '@/components/admin/create-product.vue'
+import DeleteCategory from '@/components/admin/delete-category.vue'
+import DeleteProduct from '@/components/admin/delete-product.vue'
 import CustomButton from '@/components/shared/button/custom-button.vue'
 import { useCategoryStore } from '@/store/categories'
+import { useProductStore } from '@/store/product'
 
 definePageMeta({
   layout: 'without-sidebar'
@@ -16,9 +19,12 @@ useHead({
 })
 
 const categoryStore = useCategoryStore()
+const productStore = useProductStore()
 
 const showCreateCategoryModal = ref(false)
 const showCreateProductModal = ref(false)
+const showDeleteCategoryModal = ref(false)
+const showDeleteProductModal = ref(false)
 
 const toggleCategoryModal = () => {
   showCreateCategoryModal.value = !showCreateCategoryModal.value
@@ -32,6 +38,24 @@ const openProductModal = async () => {
 const closeProductModal = () => {
   showCreateProductModal.value = false
 }
+
+const openDeleteCategoryModal = async () => {
+  await categoryStore.getCategories()
+  showDeleteCategoryModal.value = true
+}
+
+const closeDeleteCategoryModal = () => {
+  showDeleteCategoryModal.value = false
+}
+
+const openDeleteProductModal = async () => {
+  await productStore.getProductsForDelete()
+  showDeleteProductModal.value = true
+}
+
+const closeDeleteProductModal = () => {
+  showDeleteProductModal.value = false
+}
 </script>
 
 <template>
@@ -43,10 +67,18 @@ const closeProductModal = () => {
         Создать категорию
       </CustomButton>
       <div class="flex gap-4">
-        <CustomButton custom-bg="bg-red-900 text-light" class="mb-2 w-full">
+        <CustomButton
+          @click="openDeleteProductModal"
+          custom-bg="bg-red-900 text-light"
+          class="mb-2 w-full"
+        >
           Удалить товар
         </CustomButton>
-        <CustomButton custom-bg="bg-red-900 text-light" class="w-full">
+        <CustomButton
+          @click="openDeleteCategoryModal"
+          custom-bg="bg-red-900 text-light"
+          class="w-full"
+        >
           Удалить категорию
         </CustomButton>
       </div>
@@ -58,5 +90,15 @@ const closeProductModal = () => {
     />
 
     <CreateProduct @close-create-product-modal="closeProductModal" :open="showCreateProductModal" />
+
+    <DeleteCategory
+      @close-delete-category-modal="closeDeleteCategoryModal"
+      :open="showDeleteCategoryModal"
+    />
+
+    <DeleteProduct
+      @close-delete-product-modal="closeDeleteProductModal"
+      :open="showDeleteProductModal"
+    />
   </div>
 </template>
