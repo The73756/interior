@@ -31,7 +31,7 @@ const emits = defineEmits(['click-button'])
 <template>
   <div>
     <label
-      class="outline-3 flex h-[45px] w-full items-center gap-2.5 rounded-2xl bg-light px-4 outline-yellow focus-within:outline"
+      class="outline-3 flex h-[35px] w-full items-center gap-2.5 rounded-2xl bg-light px-4 outline-yellow focus-within:outline md:h-[45px]"
     >
       <input
         v-bind="attrs"

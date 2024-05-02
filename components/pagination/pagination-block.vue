@@ -28,7 +28,7 @@ const onClickPrev = () => {
     <button
       @click="onClickPrev"
       :disabled="isPrevDisabled"
-      class="text-20-700 text-light transition-colors hover:text-brown-red disabled:text-brown-red"
+      class="text-16-500 text-light transition-colors hover:text-brown-red disabled:text-brown-red md:text-20-700"
       title="Назад"
     >
       <CustomIcon name="shared/arrow-filled" />
@@ -38,7 +38,7 @@ const onClickPrev = () => {
         v-for="item in totalPages"
         :key="item"
         @click="onClickPage(item)"
-        class="text-24-700 transition-colors hover:text-brown-red"
+        class="text-18-700 transition-colors hover:text-brown-red md:text-24-700"
         :class="page === item ? 'text-brown-red' : 'text-light'"
       >
         {{ item }}
@@ -47,7 +47,7 @@ const onClickPrev = () => {
     <button
       @click="onClickNext"
       :disabled="isNextDisabled"
-      class="rotate-180 text-20-700 text-light transition-colors hover:text-brown-red disabled:text-brown-red"
+      class="rotate-180 text-16-500 text-light transition-colors hover:text-brown-red disabled:text-brown-red max-md:mt-0.5 md:text-20-700"
       title="Вперед"
     >
       <CustomIcon name="shared/arrow-filled" />

@@ -4,14 +4,17 @@ import ModalWrapper from '@/components/modal/modal-wrapper.vue'
 import CustomTitle from '@/components/shared/custom-title.vue'
 import CustomIcon from '@/components/shared/icon/custom-icon.vue'
 
-const bgModalVariants = cva('relative rounded-2xl bg-brown p-5 pt-6', {
-  variants: {
-    size: {
-      '480': 'max-w-screen-sm w-screen',
-      'fit': 'w-fit'
+const bgModalVariants = cva(
+  'relative rounded-2xl bg-brown p-5 pt-6 max-md:max-w-[calc(100vw-32px)]',
+  {
+    variants: {
+      size: {
+        '480': 'max-w-screen-sm w-screen',
+        'fit': 'w-fit'
+      }
     }
   }
-})
+)
 
 type BgModalVariantsType = VariantProps<typeof bgModalVariants>
 
@@ -62,7 +65,7 @@ const handleClose = () => {
           v-if="title"
           size="32"
           tag="h2"
-          :class="['mb-4 text-center text-light', titleClass]"
+          :class="['mb-4 text-center text-light max-md:text-24-700', titleClass]"
         >
           {{ title }}
         </CustomTitle>

@@ -10,7 +10,7 @@ const { categories } = categoryStore
 </script>
 
 <template>
-  <aside class="fixed z-10 mr-6 h-full w-[190px] bg-brown pb-44 text-light">
+  <aside class="fixed z-10 mr-6 h-full w-[190px] bg-brown pb-44 text-light max-lg:hidden">
     <div class="ml-4 mr-3 flex h-full flex-col gap-1 overflow-auto">
       <NuxtLink
         v-for="category in categories"

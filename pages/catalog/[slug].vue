@@ -20,8 +20,8 @@ const currentCategory = categoryStore.findCategoryBySlug(route.params.slug)
 
 <template>
   <div class="flex flex-1 flex-col">
-    <div class="mb-10 flex flex-wrap items-center justify-between gap-4">
-      <h2 v-if="currentCategory" class="text-5xl font-bold text-light">
+    <div class="mb-5 flex flex-wrap items-center justify-between gap-2 md:mb-10 md:gap-4">
+      <h2 v-if="currentCategory" class="text-3xl font-bold text-light md:text-5xl">
         {{ currentCategory.name }}
       </h2>
 
@@ -51,7 +51,7 @@ const currentCategory = categoryStore.findCategoryBySlug(route.params.slug)
       <div class="grid grid-cols-auto-fill gap-5">
         <ProductCard v-for="product in products" :key="product.id" :product="product" />
       </div>
-      <PaginationBlock class="mt-auto pb-10 pt-[70px]" />
+      <PaginationBlock class="mt-auto pb-5 pt-10 md:pb-10 md:pt-[70px]" />
     </div>
   </div>
 </template>

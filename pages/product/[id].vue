@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { definePageMeta } from '@/.nuxt/imports'
+import { Product } from '@/api/services/product/type'
 import ProductDetailsBlock from '@/components/product-details/product-details-block.vue'
 import { useProductDetailsStore } from '@/store/product-details'
 
@@ -22,5 +23,5 @@ const { productDetails } = storeToRefs(productDetailsStore)
 </script>
 
 <template>
-  <ProductDetailsBlock :product="productDetails" />
+  <ProductDetailsBlock :product="productDetails as Product" />
 </template>

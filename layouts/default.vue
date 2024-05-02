@@ -9,7 +9,7 @@ import SidebarBlock from '@/components/sidebar/sidebar-block.vue'
     <HeaderBlock />
     <div class="container flex">
       <SidebarBlock />
-      <main class="relative ml-[190px] flex min-h-[calc(100vh-160px)] w-full flex-col bg-beige">
+      <main class="relative flex min-h-[calc(100vh-160px)] w-full flex-col bg-beige lg:ml-[190px]">
         <div class="flex flex-1 flex-col p-5">
           <slot />
         </div>
@@ -17,7 +17,7 @@ import SidebarBlock from '@/components/sidebar/sidebar-block.vue'
 
         <div
           aria-hidden="true"
-          class="absolute left-0 top-0 h-[calc(100%-210px)] w-full translate-x-full bg-beige"
+          class="absolute left-0 top-0 h-[calc(100%-210px)] w-full translate-x-full bg-beige max-lg:hidden"
         />
       </main>
     </div>

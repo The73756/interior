@@ -76,9 +76,9 @@ const handleOk = () => {
 
 <template>
   <div>
-    <h2 class="mb-10 text-5xl font-bold text-light">Оформление заказа</h2>
+    <h2 class="mb-5 text-3xl font-bold text-light md:mb-10 md:text-5xl">Оформление заказа</h2>
 
-    <div class="flex gap-10">
+    <div class="flex gap-5 max-lg:flex-col md:gap-10">
       <div class="w-full">
         <div class="mb-4 flex max-w-[640px] justify-start rounded-2xl">
           <CheckoutTabs v-model="activeDeliveryTab" :tabs="deliveryTabs" />
@@ -100,7 +100,7 @@ const handleOk = () => {
           <CheckoutTabs v-model="activePaymentTab" :tabs="paymentTabs" />
         </div>
       </div>
-      <div class="h-fit rounded-5 bg-light p-6">
+      <div class="h-fit rounded-5 bg-light p-4 md:p-6">
         <h3 class="mb-2 text-24-700 text-brown-red">Ваш заказ</h3>
         <div class="flex items-center justify-between text-brown-red">
           <span class="text-18-500">Товары на сумму</span>

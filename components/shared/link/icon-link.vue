@@ -18,8 +18,8 @@ defineProps({
 <template>
   <NuxtLink
     :to="to"
-    class="flex min-h-[50px] min-w-[50px] items-center justify-center rounded-full bg-light text-32-500 text-brown-red transition-transform hover:scale-105"
+    class="flex items-center justify-center rounded-full bg-light p-2 text-brown-red transition-transform hover:scale-105 md:min-h-[50px] md:min-w-[50px] md:p-2.5 md:text-32-500"
   >
-    <CustomIcon :name="icon" />
+    <CustomIcon :name="icon" class="max-md:text-24-500" />
   </NuxtLink>
 </template>

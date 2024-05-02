@@ -26,6 +26,6 @@ defineProps({
       />
     </div>
 
-    <LightButton class="my-[70px]" label="Оформить заказ" :total="total" />
+    <LightButton class="my-10 md:my-[70px]" label="Оформить заказ" :total="total" />
   </div>
 </template>

@@ -26,10 +26,10 @@ const toggleCollapse = () => {
 </script>
 
 <template>
-  <div class="text-18-500 text-light">
+  <div class="text-16-500 text-light md:text-18-500">
     <p v-if="isCollapsed">{{ collapsedText }}</p>
     <p v-else>{{ text }}</p>
-    <button v-if="isTextLong" @click="toggleCollapse" class="text-18-500 underline">
+    <button v-if="isTextLong" @click="toggleCollapse" class="text-16-500 underline md:text-18-500">
       {{ isCollapsed ? 'Читать далее' : 'Скрыть' }}
     </button>
   </div>

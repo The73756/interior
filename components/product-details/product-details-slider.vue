@@ -80,6 +80,12 @@ const onThumbsClick = (index: number) => {
   gap: 20px;
   padding-right: 20px;
   margin-right: -20px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding-right: 0;
+    margin-right: 0;
+  }
 }
 .embla__container--thumb {
   width: 200px;
@@ -89,6 +95,10 @@ const onThumbsClick = (index: number) => {
   height: 420px;
   gap: 20px;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 .embla__slide {
   flex: 0 0 100%;

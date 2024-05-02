@@ -26,7 +26,7 @@ defineProps({
       />
       <NuxtLink
         :to="'/catalog/' + productsGroup.slug"
-        class="flex h-full w-full items-center justify-center gap-4 rounded-2xl bg-brown-red px-4 text-20-700 text-light transition-colors hover:bg-brown"
+        class="flex h-full w-full items-center justify-center gap-4 rounded-2xl bg-brown-red px-4 text-20-700 text-light transition-colors hover:bg-brown max-md:h-[45px]"
       >
         <span>Смотреть еще</span>
         <CustomIcon class="text-24-500" name="shared/arrow" />

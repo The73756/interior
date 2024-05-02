@@ -9,7 +9,7 @@ useSeoMeta({
 })
 </script>
 <template>
-  <div>
+  <div class="overflow-hidden">
     <NuxtLayout>
       <!--<NuxtLoadingIndicator color="#fd7d40" :height="3" />-->
       <NuxtPage />

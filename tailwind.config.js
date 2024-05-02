@@ -47,6 +47,7 @@ export default {
         '16-500': ['16px', { fontWeight: '500' }],
         '16-600': ['16px', { fontWeight: '600' }],
         '14-400': ['14px', { fontWeight: '400' }],
+        '14-500': ['14px', { fontWeight: '500' }],
         '14-700': ['14px', { fontWeight: '700' }],
         '12-500': ['12px', { fontWeight: '500' }]
       },
@@ -61,10 +62,25 @@ export default {
         'sm': '640px',
         'xsm': '360px'
       },
+      breakpoints: {
+        '2xl': '1536px',
+        'xl': '1440px',
+        'lg': '1024px',
+        'md': '768px',
+        'sm': '640px',
+        'xsm': '360px'
+      },
       container: {
         center: true,
         padding: {
           DEFAULT: '1rem'
+        },
+        screens: {
+          'sm': '100%',
+          '2xl': '1536px',
+          'xl': '1440px',
+          'lg': '1024px',
+          'md': '768px'
         }
       },
       borderRadius: {

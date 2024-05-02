@@ -17,9 +17,9 @@ defineProps({
 
 <template>
   <button
-    class="flex items-center justify-center rounded-full bg-light p-2.5 text-brown-red transition-transform hover:scale-105"
+    class="flex items-center justify-center rounded-full bg-light p-2 text-brown-red transition-transform hover:scale-105 md:p-2.5"
     :class="customSize"
   >
-    <CustomIcon :name="icon" />
+    <CustomIcon :name="icon" class="max-md:text-24-500" />
   </button>
 </template>

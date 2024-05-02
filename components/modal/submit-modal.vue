@@ -53,7 +53,7 @@ const handleRejectButton = () => {
 
     <CustomText class="text-light" size="18">{{ desc }}</CustomText>
 
-    <div class="flex w-full items-center gap-4">
+    <div class="flex w-full items-center gap-2 max-md:flex-col md:gap-4">
       <CustomButton @click="handleRejectButton" custom-bg="bg-yellow" class="w-full">
         {{ rejectButtonText }}
       </CustomButton>

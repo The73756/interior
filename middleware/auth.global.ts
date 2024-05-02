@@ -17,7 +17,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return navigateTo('/')
   }
 
-  if (user.value?.id && !isBasketInit) {
+  if (user.value?.id && !isBasketInit.value) {
     await basketStore.getBasket()
   }
 })

@@ -14,14 +14,14 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex gap-12">
+  <div class="flex flex-wrap gap-12">
     <ProductDetailsSlider :images="product.images" />
     <div class="flex flex-1 flex-col">
-      <h2 class="mb-4 text-40-500 font-extrabold text-light">
+      <h2 class="mb-4 text-32-500 font-extrabold text-light md:text-40-500">
         {{ product.title }}
       </h2>
       <div class="flex flex-1 flex-col">
-        <CollapsedText :text="product.description" />
+        <CollapsedText class="max-md:mb-2" :text="product.description" />
         <BasketButton class="mt-auto max-w-[365px]" :product="product" is-big />
       </div>
     </div>

@@ -20,7 +20,7 @@ const handleClick = (tab: Tab) => {
 </script>
 
 <template>
-  <div class="flex items-center gap-5">
+  <div class="flex items-center gap-2 max-md:flex-wrap md:gap-5">
     <button
       v-for="tab in tabs"
       :key="tab.value"

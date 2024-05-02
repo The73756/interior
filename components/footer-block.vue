@@ -22,29 +22,41 @@ const links = ref([
     ]
   }
 ])
+
+defineProps({
+  isContainer: {
+    type: Boolean,
+    default: false
+  }
+})
 </script>
 
 <template>
-  <footer class="h-[210px] bg-brown py-4 text-light">
-    <div class="container flex h-full w-full justify-between">
-      <div class="flex h-full gap-10">
+  <footer class="bg-brown py-4 text-light lg:h-[210px]">
+    <div
+      :class="isContainer ? 'container' : 'sm:container'"
+      class="flex h-full w-full justify-between max-lg:flex-wrap"
+    >
+      <div
+        class="flex gap-4 max-lg:flex-wrap max-md:mb-5 max-md:w-full max-sm:w-full max-sm:justify-between md:gap-10 lg:h-full"
+      >
         <div v-for="link in links" :key="link.title">
-          <h3 class="mb-1 text-24-700">{{ link.title }}</h3>
+          <h3 class="mb-1 text-18-700 md:text-24-700">{{ link.title }}</h3>
           <ul>
             <li v-for="item in link.items" :key="item.label">
-              <NuxtLink class="text-16-500 hover:underline" :to="item.to">{{
-                item.label
-              }}</NuxtLink>
+              <NuxtLink class="text-14-500 hover:underline md:text-16-500" :to="item.to">
+                {{ item.label }}
+              </NuxtLink>
             </li>
           </ul>
         </div>
       </div>
-      <div class="flex flex-col justify-between">
-        <div>
+      <div class="flex flex-col justify-between max-sm:w-full">
+        <div class="max-md:mb-5">
           <h2 class="text-24-700">Подписаться</h2>
           <p class="text-16-500">Введите свой email и получайте рассылку</p>
         </div>
-        <ButtonInput placeholder="E-mail" />
+        <ButtonInput placeholder="E-mail" class="max-md:mb-5" />
         <div class="flex items-center justify-between">
           <h3 class="text-18-700">Мы в соц сетях</h3>
           <div class="flex items-center gap-3">

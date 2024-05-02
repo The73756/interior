@@ -36,7 +36,7 @@ const handleLogin = () => {
     isLogin.value = true
     showGuardModal.value = false
   } else {
-    navigateTo('/')
+    navigateTo(-1)
   }
 }
 
@@ -84,11 +84,11 @@ const toggleGuardModal = () => {
       <CustomButton @click="toggleCategoryModal" class="mb-2 w-full">
         Создать категорию
       </CustomButton>
-      <div class="flex gap-4">
+      <div class="flex gap-4 max-sm:flex-wrap max-sm:gap-2">
         <CustomButton
           @click="openDeleteProductModal"
           custom-bg="bg-red-900 text-light"
-          class="mb-2 w-full"
+          class="w-full"
         >
           Удалить товар
         </CustomButton>
