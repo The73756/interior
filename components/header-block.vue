@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import LoginModal from '@/components/login-modal.vue'
 import MobileMenu from '@/components/mobile-menu.vue'
-import ModalWrapper from '@/components/modal/modal-wrapper.vue'
 import SubmitModal from '@/components/modal/submit-modal.vue'
 import RegistrationModal from '@/components/registration-modal.vue'
 import CustomButton from '@/components/shared/button/custom-button.vue'
@@ -10,7 +9,6 @@ import CustomImage from '@/components/shared/custom-image.vue'
 import CustomText from '@/components/shared/custom-text.vue'
 import CustomInput from '@/components/shared/input/custom-input.vue'
 import IconLink from '@/components/shared/link/icon-link.vue'
-import SidebarBlock from '@/components/sidebar/sidebar-block.vue'
 import { useBasketStore } from '@/store/basket'
 import { useProductStore } from '@/store/product'
 import { useUserStore } from '@/store/user'
@@ -86,6 +84,15 @@ const handleAuth = () => {
 }
 
 const toggleMobileMenu = () => {
+  if (typeof window !== 'undefined') {
+    if (isShowMobileMenu.value) {
+      document.body.style.overflow = ''
+    } else {
+      document.body.style.overflow = 'hidden'
+      window.scroll(0, 0)
+    }
+  }
+
   isShowMobileMenu.value = !isShowMobileMenu.value
 }
 </script>
@@ -202,7 +209,7 @@ const toggleMobileMenu = () => {
     />
 
     <div class="fixed bottom-0 z-10 lg:hidden" :class="isShowMobileMenu ? 'block' : 'hidden'">
-      <div class="relative bottom-0 flex h-[calc(100vh-160px)] w-screen flex-col bg-brown p-2">
+      <div class="relative bottom-0 flex h-[calc(100dvh-160px)] w-screen flex-col bg-brown p-2">
         <MobileMenu @close-mobile-menu="toggleMobileMenu" class="" />
         <div class="p-3">
           <nav>

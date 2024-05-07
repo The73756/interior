@@ -10,7 +10,7 @@ const { productGroups } = storeToRefs(productStore)
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col gap-6">
     <MainCardList v-for="group in productGroups" :key="group.id" :products-group="group" />
   </div>
 </template>

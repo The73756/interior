@@ -14,7 +14,7 @@ const emits = defineEmits(['close-mobile-menu'])
 <template>
   <div class="ml-4 mr-3 flex h-full flex-col gap-1 overflow-auto">
     <NuxtLink
-      v-for="category in Array(100).fill(categories).flat()"
+      v-for="category in categories"
       :key="category.slug"
       @click="emits('close-mobile-menu')"
       :to="'/catalog/' + category.slug"
